@@ -2,4 +2,4 @@
 - npm i
 - npm start
 
-![alt text](https://sun9-53.userapi.com/impg/JNi5oX4fIEi-7U6JCTLwedTPOdlXHALKRl9lcg/EXJyJdJFB8U.jpg?size=1920x1023&quality=95&sign=7f22ec02d25afd5d8c7a6709fcbafa27&type=album)
+![alt text](https://sun9-61.userapi.com/impg/Q7YJyclHKiyEP-Nm8ZIFknTEWh0C0JzMwANkMw/Gyvawsf8768.jpg?size=1920x918&quality=95&sign=9db182716b29d250aa7256e53dbd2878&type=album)
