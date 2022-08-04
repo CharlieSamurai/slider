@@ -1,2 +1,3 @@
-# slider
-image slider
+cd ./client
+npm i
+npm start
