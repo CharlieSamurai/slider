@@ -12,6 +12,12 @@ export const rootReducer = (state, action) => {
         currentSlide: state.currentSlide - 1,
       };
 
+    case "SET_CURRENT_SLIDE":
+      return {
+        ...state,
+        currentSlide: action.payload,
+      };
+
     case "SET_SLIDES":
       return {
         ...state,

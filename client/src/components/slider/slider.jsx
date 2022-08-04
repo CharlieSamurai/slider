@@ -1,30 +1,61 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  Footer,
+  LeftSlide,
+  Loader,
+  MiddleSlide,
+  ModalWindowSlide,
+  RightSlide,
+} from "./components";
+import { SliderContainer } from "./styled_elements";
 import { setSlidesMiddleware } from "../../redux";
-import { useEffect } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
 
 export const Slider = () => {
   const dispatch = useDispatch();
 
-  const slides = useSelector((state) => state.slides);
+  const { currentSlide, slides } = useSelector((state) => state);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isSlideLast, setIsSlideLast] = useState(false);
 
   useEffect(() => {
     dispatch(setSlidesMiddleware());
-  }, []);
+  }, [dispatch]);
 
-  const Smth = styled.div`
-    align-items: center;
-    background: black;
-    display: flex;
-    height: 50vh;
-    justify-content: center;
-    margin: 25vh 0;
-  `;
+  useEffect(() => {
+    if (slides.length) {
+      if (!slides[currentSlide + 1]) setIsSlideLast(true);
+      if (slides[currentSlide + 1] && isSlideLast) setIsSlideLast(false);
+    }
+  }, [currentSlide, slides]);
 
   return (
-    <Smth>
-      <div>TEST</div>
-      <button>CLICK</button>
-    </Smth>
+    <>
+      <SliderContainer>
+        {isModalOpen && (
+          <ModalWindowSlide
+            closeModal={() => setIsModalOpen(false)}
+            isSlideLast={isSlideLast}
+            slideUrl={slides[currentSlide]}
+          />
+        )}
+        {slides.length ? (
+          <>
+            <LeftSlide slideUrl={slides[currentSlide - 1]} />
+            <MiddleSlide
+              openModal={() => setIsModalOpen(true)}
+              slideUrl={slides[currentSlide]}
+            />
+            <RightSlide slideUrl={slides[currentSlide + 1]} />
+          </>
+        ) : (
+          <Loader />
+        )}
+      </SliderContainer>
+      {slides.length && <Footer />}
+    </>
   );
 };
