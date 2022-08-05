@@ -1,3 +1,5 @@
+- it using the WAIFU.PICS API
+
 - cd ./client
 - npm i
 - npm start
