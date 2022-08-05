@@ -14,7 +14,12 @@ export const Footer = () => {
   return (
     <FooterContainer>
       {slides.map((slide, idx) => (
-        <FooterImg alt="" onClick={() => handleClick(idx)} src={slide} />
+        <FooterImg
+          alt=""
+          key={idx + slide}
+          onClick={() => handleClick(idx)}
+          src={slide}
+        />
       ))}
     </FooterContainer>
   );

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { previousSlideAction } from "../../../../redux";
-import { SideSlideContainer, SlideImg } from "../_shared";
+import { SlideContainer } from "../_shared";
+import { SlideImg } from "../../_shared";
+import { previousSlideAction } from "../../../../../redux";
 
 export const LeftSlide = ({ slideUrl }) => {
   const dispatch = useDispatch();
@@ -19,12 +20,12 @@ export const LeftSlide = ({ slideUrl }) => {
   }, [slideUrl]);
 
   return (
-    <SideSlideContainer>
+    <SlideContainer>
       {slideUrl
         ? !isChanging && (
             <SlideImg alt="" onClick={handleClick} src={slideUrl} />
           )
         : null}
-    </SideSlideContainer>
+    </SlideContainer>
   );
 };

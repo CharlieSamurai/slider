@@ -1,29 +1,17 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import {
-  Footer,
-  LeftSlide,
-  Loader,
-  MiddleSlide,
-  ModalWindowSlide,
-  RightSlide,
-} from "./components";
+import { Footer, Loader, ModalWindowSlide, Slides, StartMenu } from "./components";
 import { SliderContainer } from "./styled_elements";
-import { setSlidesMiddleware } from "../../redux";
 
 export const Slider = () => {
-  const dispatch = useDispatch();
-
   const { currentSlide, slides } = useSelector((state) => state);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [isSlideLast, setIsSlideLast] = useState(false);
-
-  useEffect(() => {
-    dispatch(setSlidesMiddleware());
-  }, [dispatch]);
 
   useEffect(() => {
     if (slides.length) {
@@ -35,27 +23,26 @@ export const Slider = () => {
   return (
     <>
       <SliderContainer>
-        {isModalOpen && (
-          <ModalWindowSlide
-            closeModal={() => setIsModalOpen(false)}
-            isSlideLast={isSlideLast}
-            slideUrl={slides[currentSlide]}
-          />
-        )}
+        {isLoading && <Loader />}
         {slides.length ? (
-          <>
-            <LeftSlide slideUrl={slides[currentSlide - 1]} />
-            <MiddleSlide
-              openModal={() => setIsModalOpen(true)}
-              slideUrl={slides[currentSlide]}
-            />
-            <RightSlide slideUrl={slides[currentSlide + 1]} />
-          </>
-        ) : (
-          <Loader />
-        )}
+          <Slides
+            currentSlide={currentSlide}
+            openModal={() => setIsModalOpen(true)}
+            slides={slides}
+          />
+        ) : null}
+        {!isLoading && !slides.length ? (
+          <StartMenu setLoader={setIsLoading} />
+        ) : null}
       </SliderContainer>
       {slides.length && <Footer />}
+      {isModalOpen && (
+        <ModalWindowSlide
+          closeModal={() => setIsModalOpen(false)}
+          isSlideLast={isSlideLast}
+          slideUrl={slides[currentSlide]}
+        />
+      )}
     </>
   );
 };

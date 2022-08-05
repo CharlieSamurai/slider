@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-export const SideSlideContainer = styled.div`
-  align-items: center;
-  display: flex;
-  height: 90%;
-  width: 25%;
-`;
-
 export const SlideImg = styled.img`
   animation-duration: 2s;
   animation-name: image_appear;
