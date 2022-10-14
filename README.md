@@ -1,4 +1,6 @@
-- it using the WAIFU.PICS API
+- works on node -v 16.12.0
+
+- it's using the WAIFU.PICS API
 
 - cd ./client
 - npm i
